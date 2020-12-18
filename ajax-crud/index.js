@@ -10,16 +10,17 @@ displayRecords(displayUrl, table);
 
 
 function deleteRecord(id) {
-    
-    let delData = new URLSearchParams();
-    delData.append("operation", "delete");
-    delData.append("id", id);
-    const delOption = {
-        method: "POST",
-        body: delData
-    };
-    console.log(delData)
-    fetch(displayUrl, delOption).then(response => displayRecords(displayUrl, table))
+    let cnfrm = confirm("Are You Sure?");
+    if (cnfrm) {
+        let delData = new URLSearchParams();
+        delData.append("operation", "delete");
+        delData.append("id", id);
+        const delOption = {
+            method: "POST",
+            body: delData
+        };
+        fetch(displayUrl, delOption).then(() => displayRecords(displayUrl, table))
+    }
 }
 
 
