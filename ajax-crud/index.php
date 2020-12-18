@@ -31,7 +31,7 @@ require "connection.php";
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
 
 </head>
 
@@ -125,7 +125,26 @@ require "connection.php";
                             
                         </div>
                         <div class="card-body">
+                        <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0" id="myTable">
+                        <thead>
+                        <tr class="text-center">
+                        <th>#</th>
+                        <th>FIRST NAME</th>
+                        <th>LAST NAME</th>
+                        <th>EMAIL</th>
+                        <th>CITY</th>
+                        
+                        </tr>
+                        
+                        </thead>
+                        <tbody id="tBody">
 
+                        </tbody>
+                        
+                        </table>
+                        
+                        </div>
 
                             
                         </div>
@@ -197,7 +216,13 @@ require "connection.php";
 
 
 
+<!-- <script>
 
+let displayUrl = 'backend.php';
+let table = document.getElementById("myTable");
+console.log(table)
+
+</script> -->
 
 
 
