@@ -10,10 +10,10 @@ if ($result->num_rows > 0){
      echo   '<tbody>
             <tr class="text-center">
                <td>'.htmlspecialchars($index).'</td>
-               <td>'.htmlspecialchars($row["firstname"]).'</td>
-               <td>'.htmlspecialchars($row["lastname"]).'</td>
+               <td>'.htmlspecialchars(ucwords($row["firstname"])).'</td>
+               <td>'.htmlspecialchars(ucwords($row["lastname"])).'</td>
                <td>'.htmlspecialchars($row["email"]).'</td>
-               <td>'.htmlspecialchars($row["city"]).'</td>
+               <td>'.htmlspecialchars(ucwords($row["city"])).'</td>
                <td><span style="color:green;"><i class="fas fa-edit"></i></span></td>
                <td><button style="border:none;background:rgba(0,0,0,0);" onclick="deleteRecord('.$row["stu_id"].')"><span style="color:red;"><i class="fas fa-trash"></i></span></button></td>
             </tr>
@@ -35,6 +35,27 @@ if(isset($_POST["operation"]) && $_POST["operation"]!==""){
         $stmt = $connect->prepare($delete);
         $stmt->bind_param("i",$id);
         $stmt->execute();
+
+    }
+}
+
+
+if(isset($_POST["operation"]) && $_POST["operation"]!==""){
+    $operation = mysqli_real_escape_string($connect, $_POST["operation"]);
+
+    if($operation === "insert"){
+        $fname = mysqli_real_escape_string($connect, $_POST["fname"]);
+        $lname = mysqli_real_escape_string($connect, $_POST["lname"]);
+        $email = mysqli_real_escape_string($connect, $_POST["email"]);
+        $city = mysqli_real_escape_string($connect, $_POST["city"]);
+
+       var_dump($operation);
+
+        $insert = "INSERT INTO `students`(`firstname`, `lastname`, `email`, `city`) VALUES (?,?,?,?)";
+        $stmt = $connect->prepare($insert);
+        $stmt->bind_param("ssss",$fname, $lname, $email, $city);
+        $stmt->execute();
+        
 
     }
 }

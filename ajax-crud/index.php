@@ -109,7 +109,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary" style="display: inline;"></h6>
+                            <h6 class="m-0 font-weight-bold text-primary" style="text-align:right;color:blue;cursor:pointer;" data-bs-toggle="modal" data-bs-target="#insertModal">+ADD</h6>
                             
                         </div>
                         <div class="card-body">
@@ -167,6 +167,73 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- INSERT MODAL -->
+
+    <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title" id="exampleModalLabel" >Register Yourself</h5>
+      </div>
+      <div class="modal-body">
+        <form method="">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="fname" placeholder="First Name" required>
+          </div>
+          <div class="mb-3">
+          <input type="text" class="form-control" id="lname" placeholder="Last Name" required>
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" id="email" placeholder="Email ID" required>
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="city" placeholder="City" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- UPDATE MODAL -->
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title" id="exampleModalLabel" >Update Record</h5>
+      </div>
+      <div class="modal-body">
+        <form id="myForm">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="fname" placeholder="First Name" required>
+          </div>
+          <div class="mb-3">
+          <input type="text" class="form-control" id="lname" placeholder="Last Name" required>
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" id="email" placeholder="Email ID" required>
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="city" placeholder="City" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="submit">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -219,6 +286,8 @@ console.log(table)
   
 
     <!-- Bootstrap core JavaScript-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
