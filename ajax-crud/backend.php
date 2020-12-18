@@ -15,7 +15,7 @@ if ($result->num_rows > 0){
                <td>'.htmlspecialchars($row["email"]).'</td>
                <td>'.htmlspecialchars($row["city"]).'</td>
                <td><span style="color:green;"><i class="fas fa-edit"></i></span></td>
-               <td><button style="border:none;background:rgba(0,0,0,0);" onclick="deleteRecord("'.htmlspecialchars($row["stu_id"]).'")"><span style="color:red;"><i class="fas fa-trash"></i></span></button></td>
+               <td><button style="border:none;background:rgba(0,0,0,0);" onclick="deleteRecord('.$row["stu_id"].')"><span style="color:red;"><i class="fas fa-trash"></i></span></button></td>
             </tr>
             </tbody>';
 
