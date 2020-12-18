@@ -1,9 +1,24 @@
 
-function displayRecords(url, element){
-fetch(url).then(response => response.text().then(text => element.innerHTML += text ));
+function displayRecords(url, element,option){
+   
+fetch(url,option).then(response => response.text().then(text => element.innerHTML += text ));
 }
 
 let displayUrl = 'backend.php';
 let table = document.getElementById("myTable");
 
 displayRecords(displayUrl, table);
+
+    
+    function deleteRecord(id){
+    let delData = new URLSearchParams();
+    delData.append("operation","delete");
+    delData.append("id",id);
+    const delOption = {
+        method:"POST",
+        body:delData
+  }
+  displayRecords(displayUrl, table, delOption)
+}
+
+

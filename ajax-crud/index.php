@@ -1,7 +1,6 @@
 <?php
+ob_start();
 require "connection.php";
-
-
 
 ?>
 
@@ -126,7 +125,7 @@ require "connection.php";
                         </div>
                         <div class="card-body">
                         <div class="table-responsive">
-                        <table class="table table-bordered" width="100%" cellspacing="0" id="myTable">
+                        <table class="table table-success table-striped table-hover" width="100%" cellspacing="0" id="myTable" style="color:black;">
                         <thead>
                         <tr class="text-center">
                         <th>#</th>
@@ -134,6 +133,8 @@ require "connection.php";
                         <th>LAST NAME</th>
                         <th>EMAIL</th>
                         <th>CITY</th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
                         
                         </tr>
                         
