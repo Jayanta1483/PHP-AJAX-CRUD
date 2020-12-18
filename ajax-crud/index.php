@@ -209,20 +209,7 @@
         <h5 class="modal-title" id="exampleModalLabel" >Update Record</h5>
       </div>
       <div class="modal-body">
-        <form id="myForm">
-          <div class="mb-3">
-            <input type="text" class="form-control" id="fname" placeholder="First Name" required>
-          </div>
-          <div class="mb-3">
-          <input type="text" class="form-control" id="lname" placeholder="Last Name" required>
-          </div>
-          <div class="mb-3">
-            <input type="email" class="form-control" id="email" placeholder="Email ID" required>
-          </div>
-          <div class="mb-3">
-            <input type="text" class="form-control" id="city" placeholder="City" required>
-          </div>
-        </form>
+        <form id="myForm"></form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

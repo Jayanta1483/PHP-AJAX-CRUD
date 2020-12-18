@@ -5,8 +5,14 @@ function displayRecords(url, element, option) {
 
 let url = 'backend.php';
 let table = document.getElementById("tBody");
+let showData = new URLSearchParams();
+showData.append("operation", "display")
+const displayOption = {
+    method: "POST",
+    body: showData
+}
 
-displayRecords(url, table);
+displayRecords(url, table, displayOption);
 
 
 function deleteRecord(id) {
@@ -19,7 +25,7 @@ function deleteRecord(id) {
             method: "POST",
             body: delData
         };
-        fetch(url, delOption).then(() => displayRecords(url, table))
+        fetch(url, delOption).then(() => displayRecords(url, table, displayOption))
     }
 }
 
@@ -43,13 +49,22 @@ submit.addEventListener("click", () => {
         method: "POST",
         body: insertData
     };
-    fetch(url, insertOption).then(() => displayRecords(url, table))
+    fetch(url, insertOption).then(() => displayRecords(url, table, displayOption))
     fname.value = lname.value = email.value = city.value = "";
 })
 
 
 let myForm = document.getElementById("myForm");
 
+function showRecord(id) {
+    let profileData = new URLSearchParams();
+    profileData.append("operation", "profile");
+    profileData.append("id", id)
 
-displayRecords(url, myForm, )
+    let profileOption = {
+        method: "POST",
+        body: profileData
+    }
 
+    displayRecords(url, myForm, profileOption)
+}
