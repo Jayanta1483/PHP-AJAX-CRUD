@@ -20,10 +20,24 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="index.js" defer></script>
+    <style>
+    #loader{
+        width: 100vw;
+        height: 100vh;
+        background: white url('https://cdn.lowgif.com/full/282f4d7f8c3b11cf-google-animated-gif-preloader-on-behance.gif') 
+                    no-repeat center;
+        position: absolute;
+        z-index: 99999;
+    }
+    
+    
+    </style>
 
 </head>
 
 <body id="page-top">
+
+<div id="loader"></div>
 
     <!-- Page Wrapper -->
     <div id="wrapper">

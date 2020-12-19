@@ -68,3 +68,10 @@ function showRecord(id) {
 
     displayRecords(url, myForm, profileOption)
 }
+
+
+//FOR PRELOADING
+
+let preloader = document.getElementById("loader");
+let body = document.getElementById("page-top");
+body.onload = ()=> preloader.style.display = "none";
