@@ -238,7 +238,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="subEdit" onclick="updateRecord('.htmlspecialchars($stu_id).')">Save</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="subEdit" value="">Save</button>
                     </div>
                 
             </div>

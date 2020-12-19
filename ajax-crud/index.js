@@ -60,6 +60,9 @@ let ln = document.getElementById("ln");
 let em = document.getElementById("em");
 let ct = document.getElementById("ct");
 
+const updateBtn = document.getElementById("subEdit");
+let btnValue = updateBtn.value;
+
 function showRecord(id) {
     let profileData = new URLSearchParams();
     profileData.append("operation", "profile");
@@ -71,38 +74,38 @@ function showRecord(id) {
     }
 
     fetch(url, profileOption).then(response => response.json()).then(json => {
-                                                           console.log(json)
-                                                              fn.value = json.fname;
-                                                              ln.value = json.lname;
-                                                              em.value = json.email;
-                                                              ct.value = json.city;
-                                                          })
+        console.log(json)
+        btnValue = json.id;
+        fn.value = json.fname;
+        ln.value = json.lname;
+        em.value = json.email;
+        ct.value = json.city;
+    })
 }
 
 
-const updateBtn = document.getElementById("subEdit");
-// let fn = document.getElementById("fn");
-// let ln = document.getElementById("ln");
-// let em = document.getElementById("em");
-// let ct = document.getElementById("ct");
 
 
-function updateRecord(id){
-    
+
+updateBtn.addEventListener("click", updateRecord)
+
+function updateRecord() {
+
     let updateData = new URLSearchParams();
-    updateData.append("operation","update");
-    updateData.append("id",id);
-    updateData.append("fn",fn.value);
-    updateData.append("ln",ln.value);
-    updateData.append("em",em.value);
-    updateData.append("ct",ct.value);
+    updateData.append("operation", "update");
+    updateData.append("id", btnValue);
+    updateData.append("fn", fn.value);
+    updateData.append("ln", ln.value);
+    updateData.append("em", em.value);
+    updateData.append("ct", ct.value);
 
+    console.log(btnValue, fn.value);
     let updateOption = {
-        method:"POST",
-        body:updateData
+        method: "POST",
+        body: updateData
     }
 
-   fetch(url, updateOption).then(()=> displayRecords(url, table, displayOption));
+    fetch(url, updateOption).then(() => displayRecords(url, table, displayOption));
 }
 
 
@@ -120,4 +123,4 @@ function updateRecord(id){
 
 let preloader = document.getElementById("loader");
 let body = document.getElementById("page-top");
-body.onload = ()=> preloader.style.display = "none";
+body.onload = () => preloader.style.display = "none";

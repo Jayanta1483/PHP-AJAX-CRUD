@@ -73,7 +73,7 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt->bind_result($stu_id, $fname, $lname, $email, $city);
 
         while ($stmt->fetch()) {
-           $response = array("fname"=>$fname,"lname"=> $lname,"email"=> $email,"city"=> $city);
+           $response = array("id"=> $stu_id, "fname"=>$fname,"lname"=> $lname,"email"=> $email,"city"=> $city);
            $response = json_encode($response);
            echo $response;
         }
@@ -88,9 +88,11 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $city = mysqli_real_escape_string($connect, $_POST["ct"]);
       $update_id = mysqli_real_escape_string($connect, $_POST["id"]);
 
+      var_dump($fname);
+
       $update = "UPDATE `students` SET `firstname`=?,`lastname`=?,`email`=?,`city`=? WHERE `stu_id` = ?";
       $stmt = $connect->prepare($update);
-      $stmt->bind_param("sssi",$fname, $lname, $email, $city, $update_id );
+      $stmt->bind_param("ssssi",$fname, $lname, $email, $city, $update_id );
       $stmt->execute();
        echo "Updated Successfully !!";
     }
