@@ -72,7 +72,7 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
                    <input type="text" class="form-control" id="lname" placeholder="Last Name" required value="' . htmlspecialchars(ucwords($lname)) . '">
                 </div>
                 <div class="mb-3">
-                   <input type="email" class="form-control" id="email" placeholder="Email ID" required value="' . htmlspecialchars(ucwords($email)) . '">
+                   <input type="email" class="form-control" id="email" placeholder="Email ID" required value="' . htmlspecialchars($email) . '">
                 </div>
                 <div class="mb-3">
                    <input type="text" class="form-control" id="city" placeholder="City" required value="' . htmlspecialchars(ucwords($city)) . '">
