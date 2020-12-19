@@ -4,10 +4,12 @@ require "connection.php";
 
 
 
-//extract($_POST);
+
 
 if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
     $operation = mysqli_real_escape_string($connect, $_POST["operation"]);
+
+    // FOR DISPLAY RECORDS:
 
     if ($operation === "display") {
 
@@ -24,8 +26,8 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
                <td>' . htmlspecialchars(ucwords($row["lastname"])) . '</td>
                <td>' . htmlspecialchars($row["email"]) . '</td>
                <td>' . htmlspecialchars(ucwords($row["city"])) . '</td>
-               <td><button style="border:none;background:rgba(0,0,0,0);" onclick="showRecord(' . $row["stu_id"] . ')" data-bs-toggle="modal" data-bs-target="#updateModal"><span style="color:green;"><i class="fas fa-edit"></i></span></button></td>
-               <td><button style="border:none;background:rgba(0,0,0,0);" onclick="deleteRecord(' . $row["stu_id"] . ')"><span style="color:red;"><i class="fas fa-trash"></i></span></button></td>
+               <td><button style="border:none;background:rgba(0,0,0,0);" onclick="showRecord(' . htmlspecialchars($row["stu_id"]) . ')" data-bs-toggle="modal" data-bs-target="#updateModal"><span style="color:green;"><i class="fas fa-edit"></i></span></button></td>
+               <td><button style="border:none;background:rgba(0,0,0,0);" onclick="deleteRecord(' . htmlspecialchars($row["stu_id"]) . ')"><span style="color:red;"><i class="fas fa-trash"></i></span></button></td>
             </tr>
             </tbody>';
 
@@ -35,6 +37,8 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
     }
 
 
+    //FOR DELETE RECORDS:
+
     if ($operation === "delete") {
         $id = mysqli_real_escape_string($connect, $_POST["id"]);
         $delete = "DELETE FROM `students` WHERE stu_id = ?";
@@ -42,6 +46,8 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt->bind_param("i", $id);
         $stmt->execute();
     }
+
+    //FOR INSERT RECORDS:
 
     if ($operation === "insert") {
         $fname = mysqli_real_escape_string($connect, $_POST["fname"]);
@@ -55,6 +61,8 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt->execute();
     }
 
+    //FOR DISPLAY PROFILE:
+
     if ($operation === "profile") {
         $profile_id = mysqli_real_escape_string($connect, $_POST["id"]);
 
@@ -65,18 +73,23 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt->bind_result($stu_id, $fname, $lname, $email, $city);
 
         while ($stmt->fetch()) {
-            echo  '<div class="mb-3">
-                   <input type="text" class="form-control" id="fname" placeholder="First Name" required value="' . htmlspecialchars(ucwords($fname)) . '">
-                </div>
-                <div class="mb-3">
-                   <input type="text" class="form-control" id="lname" placeholder="Last Name" required value="' . htmlspecialchars(ucwords($lname)) . '">
-                </div>
-                <div class="mb-3">
-                   <input type="email" class="form-control" id="email" placeholder="Email ID" required value="' . htmlspecialchars($email) . '">
-                </div>
-                <div class="mb-3">
-                   <input type="text" class="form-control" id="city" placeholder="City" required value="' . htmlspecialchars(ucwords($city)) . '">
-                </div>';
+     
         }
+    }
+
+    //FOR UPDATE PROFILE:
+
+    if($operation === "update"){
+        $fname = mysqli_real_escape_string($connect, $_POST["fn"]);
+        $lname = mysqli_real_escape_string($connect, $_POST["ln"]);
+        $email = mysqli_real_escape_string($connect, $_POST["em"]);
+        $city = mysqli_real_escape_string($connect, $_POST["ct"]);
+      $update_id = mysqli_real_escape_string($connect, $_POST["id"]);
+
+      $update = "UPDATE `students` SET `firstname`=?,`lastname`=?,`email`=?,`city`=? WHERE `stu_id` = ?";
+      $stmt = $connect->prepare($update);
+      $stmt->bind_param("sssi",$fname, $lname, $email, $city, $update_id );
+      $stmt->execute();
+       echo "Updated Successfully !!";
     }
 }

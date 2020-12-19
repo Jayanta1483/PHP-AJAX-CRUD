@@ -70,6 +70,42 @@ function showRecord(id) {
 }
 
 
+const updateBtn = document.getElementById("subEdit");
+let fn = document.getElementById("fn");
+let ln = document.getElementById("ln");
+let em = document.getElementById("em");
+let ct = document.getElementById("ct");
+
+
+function updateRecord(id){
+    
+    let updateData = new URLSearchParams();
+    updateData.append("operation","update");
+    updateData.append("id",id);
+    updateData.append("fn",fn.value);
+    updateData.append("ln",ln.value);
+    updateData.append("em",em.value);
+    updateData.append("ct",ct.value);
+
+    let updateOption = {
+        method:"POST",
+        body:updateData
+    }
+
+   fetch(url, updateOption).then(()=> displayRecords(url, table, displayOption));
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //FOR PRELOADING
 
 let preloader = document.getElementById("loader");
