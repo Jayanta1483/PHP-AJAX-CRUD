@@ -219,28 +219,28 @@
                 <div class="modal-header text-center">
                     <h5 class="modal-title" id="exampleModalLabel">Update Record</h5>
                 </div>
-                <div id="myForm">
+                
                     <div class="modal-body">
-                        <form>
+                        <form id="myForm">
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="fn" placeholder="First Name" required value="">
+                                <input type="text" class="form-control text-capitalize" id="fn" placeholder="First Name" required value="">
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="ln" placeholder="Last Name" required value="">
+                                <input type="text" class="form-control text-capitalize" id="ln" placeholder="Last Name" required value="">
                             </div>
                             <div class="mb-3">
                                 <input type="email" class="form-control" id="em" placeholder="Email ID" required value="">
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="ct" placeholder="City" required value="">
+                                <input type="text" class="form-control text-capitalize" id="ct" placeholder="City" required value="">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="subEdit" onclick="updateRecord('.htmlspecialchars($stu_id).')">Save</button>
-                    </div>';
-                </div>
+                    </div>
+                
             </div>
         </div>
     </div>

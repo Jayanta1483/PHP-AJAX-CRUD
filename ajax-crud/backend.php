@@ -73,7 +73,9 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt->bind_result($stu_id, $fname, $lname, $email, $city);
 
         while ($stmt->fetch()) {
-     
+           $response = array("fname"=>$fname,"lname"=> $lname,"email"=> $email,"city"=> $city);
+           $response = json_encode($response);
+           echo $response;
         }
     }
 

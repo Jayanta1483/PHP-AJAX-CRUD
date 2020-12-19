@@ -55,6 +55,10 @@ submit.addEventListener("click", () => {
 
 
 let myForm = document.getElementById("myForm");
+let fn = document.getElementById("fn");
+let ln = document.getElementById("ln");
+let em = document.getElementById("em");
+let ct = document.getElementById("ct");
 
 function showRecord(id) {
     let profileData = new URLSearchParams();
@@ -66,15 +70,21 @@ function showRecord(id) {
         body: profileData
     }
 
-    displayRecords(url, myForm, profileOption)
+    fetch(url, profileOption).then(response => response.json()).then(json => {
+                                                           console.log(json)
+                                                              fn.value = json.fname;
+                                                              ln.value = json.lname;
+                                                              em.value = json.email;
+                                                              ct.value = json.city;
+                                                          })
 }
 
 
 const updateBtn = document.getElementById("subEdit");
-let fn = document.getElementById("fn");
-let ln = document.getElementById("ln");
-let em = document.getElementById("em");
-let ct = document.getElementById("ct");
+// let fn = document.getElementById("fn");
+// let ln = document.getElementById("ln");
+// let em = document.getElementById("em");
+// let ct = document.getElementById("ct");
 
 
 function updateRecord(id){
