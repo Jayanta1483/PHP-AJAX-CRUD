@@ -1,11 +1,11 @@
 function displayRecords(url, element, option) {
-
+     
     fetch(url, option).then(response => response.text().then(text => element.innerHTML = text));
 }
 
 let url = 'backend.php';
 let table = document.getElementById("tBody");
-const pagination = document.querySelectorAll(".page");
+
 
 let showData = new URLSearchParams();
 showData.append("operation", "display");
@@ -15,6 +15,30 @@ const displayOption = {
 }
 
 displayRecords(url, table, displayOption);
+
+let pageData = new URLSearchParams();
+pageData.append("operation", "pagination");
+const pageOption = {
+    method:"POST",
+    body:pageData
+}
+
+let pageNum;
+fetch(url, pageOption).then(response => response.text().then(text =>{
+    pageNum = Number(text) / 4;
+    
+}))
+
+const pagi = document.getElementById("pagination");
+console.log(pageNum)
+
+for(let i = 1; i <= pageNum; i++){
+    pagi.innerHTML = console.log(i)//'<button class="page" value="'+i+'">'+i+'</button>');
+    
+}
+
+const pagination = document.querySelectorAll(" .page");
+console.log(pagination)
 
 pagination.forEach(element => element.onclick = (e) => {
 

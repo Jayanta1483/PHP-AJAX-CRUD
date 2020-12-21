@@ -1,4 +1,5 @@
 <?php
+
 require "connection.php";
 
 
@@ -22,14 +23,15 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $limit = 4;
         $start = ($page - 1) * $limit;
 
-        $select = "SELECT * FROM `students` LIMIT $start, $limit";
+        $select = "SELECT * FROM `students` ORDER BY `firstname` LIMIT $start, $limit";
         $result = $connect->query($select);
 
         if (!empty($result) && $result->num_rows > 0) {
             $index = $start + 1;
+            $output = "";
+            $page_no = $result->num_rows / $limit;
             while ($row = $result->fetch_assoc()) {
-                echo   '<tbody>
-            <tr class="text-center">
+         echo '<tr class="text-center">
                <td>' . htmlspecialchars($index) . '</td>
                <td>' . htmlspecialchars(ucwords($row["firstname"])) . '</td>
                <td>' . htmlspecialchars(ucwords($row["lastname"])) . '</td>
@@ -37,11 +39,32 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
                <td>' . htmlspecialchars(ucwords($row["city"])) . '</td>
                <td><button style="border:none;background:rgba(0,0,0,0);" onclick="showRecord(' . htmlspecialchars($row["stu_id"]) . ')" data-bs-toggle="modal" data-bs-target="#updateModal"><span style="color:green;"><i class="fas fa-edit"></i></span></button></td>
                <td><button style="border:none;background:rgba(0,0,0,0);" onclick="deleteRecord(' . htmlspecialchars($row["stu_id"]) . ')"><span style="color:red;"><i class="fas fa-trash"></i></span></button></td>
-            </tr>
-            </tbody>';
+                </tr>';
 
                 $index++;
+
+                
             }
+
+            for($i = 1; $i<$page_no; $i++){
+                echo '<div class="text-center">
+                <button class="btn btn-success page" value="'.$i.'">'.$i.'</button>
+               </div>' ;
+            }
+
+            echo $output;
+           
+            
+        }
+    }
+
+    //FOR PAGINATION:
+
+    if($operation === "pagination"){
+        $select = "SELECT * FROM `students`";
+        $result = $connect->query($select);
+        if(!empty($result) && $result->num_rows > 0){
+            echo $result->num_rows;
         }
     }
 
@@ -103,6 +126,8 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt = $connect->prepare($update);
         $stmt->bind_param("ssssi", $fname, $lname, $email, $city, $update_id);
         $stmt->execute();
-        echo "Updated Successfully !!";
+       // echo "Updated Successfully !!";
+ 
+ 
     }
 }
