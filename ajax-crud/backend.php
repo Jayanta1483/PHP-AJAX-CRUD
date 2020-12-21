@@ -46,14 +46,6 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
                 
             }
 
-            for($i = 1; $i<$page_no; $i++){
-                echo '<div class="text-center">
-                <button class="btn btn-success page" value="'.$i.'">'.$i.'</button>
-               </div>' ;
-            }
-
-            echo $output;
-           
             
         }
     }

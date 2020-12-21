@@ -19,7 +19,7 @@
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
+
     <style>
         #loader {
             width: 100vw;
@@ -29,7 +29,7 @@
             z-index: 99999;
         }
     </style>
-<script src="index.js" defer></script>
+    <script src="index.js" defer></script>
 </head>
 
 <body id="page-top">
@@ -143,7 +143,13 @@
 
                                     </tbody>
                                 </table>
-                           <div id="pagination" class="text-center"></div>
+                                <div id="pagination" class="text-center">
+                                    <button class="btn btn-success page" value="1">1</button>
+                                    <button class="btn btn-success page" value="2">2</button>
+                                    <button class="btn btn-success page" value="3">3</button>
+                                    <button class="btn btn-success page" value="4">4</button>
+                                    <button class="btn btn-success page" value="5">5</button>
+                                </div>
 
 
                             </div>
