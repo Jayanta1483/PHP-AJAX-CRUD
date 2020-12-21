@@ -144,6 +144,14 @@
                                     </tbody>
 
                                 </table>
+                                <div class="text-center">
+                                    <button class="btn btn-success page" value="1">1</button>
+                                    <button class="btn btn-success page" value="2">2</button>
+                                    <button class="btn btn-success page" value="3">3</button>
+                                    <button class="btn btn-success page" value="4">4</button>
+                                    <button class="btn btn-success page" value="5">5</button>
+                                </div>
+
 
                             </div>
 
@@ -219,28 +227,28 @@
                 <div class="modal-header text-center">
                     <h5 class="modal-title" id="exampleModalLabel">Update Record</h5>
                 </div>
-                
-                    <div class="modal-body">
-                        <form id="myForm">
-                            <div class="mb-3">
-                                <input type="text" class="form-control text-capitalize" id="fn" placeholder="First Name" required value="">
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control text-capitalize" id="ln" placeholder="Last Name" required value="">
-                            </div>
-                            <div class="mb-3">
-                                <input type="email" class="form-control" id="em" placeholder="Email ID" required value="">
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control text-capitalize" id="ct" placeholder="City" required value="">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="subEdit" value="">Save</button>
-                    </div>
-                
+
+                <div class="modal-body">
+                    <form id="myForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control text-capitalize" id="fn" placeholder="First Name" required value="">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control text-capitalize" id="ln" placeholder="Last Name" required value="">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="em" placeholder="Email ID" required value="">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control text-capitalize" id="ct" placeholder="City" required value="">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="subEdit" value="">Save</button>
+                </div>
+
             </div>
         </div>
     </div>

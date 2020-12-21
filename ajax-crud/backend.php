@@ -13,11 +13,20 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
 
     if ($operation === "display") {
 
-        $select = "SELECT `stu_id`, `firstname`, `lastname`, `email`, `city` FROM `students`";
+        if (isset($_POST["page"]) && $_POST["page"] !== "") {
+            $page = mysqli_real_escape_string($connect, $_POST["page"]);
+        } else {
+            $page = 1;
+        }
+
+        $limit = 4;
+        $start = ($page - 1) * $limit;
+
+        $select = "SELECT * FROM `students` LIMIT $start, $limit";
         $result = $connect->query($select);
 
-        if ($result->num_rows > 0) {
-            $index = 1;
+        if (!empty($result) && $result->num_rows > 0) {
+            $index = $start + 1;
             while ($row = $result->fetch_assoc()) {
                 echo   '<tbody>
             <tr class="text-center">
@@ -73,27 +82,27 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt->bind_result($stu_id, $fname, $lname, $email, $city);
 
         while ($stmt->fetch()) {
-           $response = array("id"=> $stu_id, "fname"=>$fname,"lname"=> $lname,"email"=> $email,"city"=> $city);
-           $response = json_encode($response);
-           echo $response;
+            $response = array("id" => $stu_id, "fname" => $fname, "lname" => $lname, "email" => $email, "city" => $city);
+            $response = json_encode($response);
+            echo $response;
         }
     }
 
     //FOR UPDATE PROFILE:
 
-    if($operation === "update"){
+    if ($operation === "update") {
         $fname = mysqli_real_escape_string($connect, $_POST["fn"]);
         $lname = mysqli_real_escape_string($connect, $_POST["ln"]);
         $email = mysqli_real_escape_string($connect, $_POST["em"]);
         $city = mysqli_real_escape_string($connect, $_POST["ct"]);
-      $update_id = mysqli_real_escape_string($connect, $_POST["id"]);
+        $update_id = mysqli_real_escape_string($connect, $_POST["id"]);
 
-      var_dump($fname);
+        var_dump($fname);
 
-      $update = "UPDATE `students` SET `firstname`=?,`lastname`=?,`email`=?,`city`=? WHERE `stu_id` = ?";
-      $stmt = $connect->prepare($update);
-      $stmt->bind_param("ssssi",$fname, $lname, $email, $city, $update_id );
-      $stmt->execute();
-       echo "Updated Successfully !!";
+        $update = "UPDATE `students` SET `firstname`=?,`lastname`=?,`email`=?,`city`=? WHERE `stu_id` = ?";
+        $stmt = $connect->prepare($update);
+        $stmt->bind_param("ssssi", $fname, $lname, $email, $city, $update_id);
+        $stmt->execute();
+        echo "Updated Successfully !!";
     }
 }

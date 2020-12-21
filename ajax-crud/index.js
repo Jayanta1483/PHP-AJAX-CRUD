@@ -5,14 +5,31 @@ function displayRecords(url, element, option) {
 
 let url = 'backend.php';
 let table = document.getElementById("tBody");
+const pagination = document.querySelectorAll(".page");
+
 let showData = new URLSearchParams();
-showData.append("operation", "display")
+showData.append("operation", "display");
 const displayOption = {
     method: "POST",
     body: showData
 }
 
 displayRecords(url, table, displayOption);
+
+pagination.forEach(element => element.onclick = (e) => {
+
+    console.log(e.target.value)
+    let showData = new URLSearchParams();
+    showData.append("operation", "display");
+    showData.append("page", e.target.value)
+
+    const displayPageOption = {
+        method: "POST",
+        body: showData
+    }
+    displayRecords(url, table, displayPageOption);
+})
+
 
 
 function deleteRecord(id) {
