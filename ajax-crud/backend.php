@@ -69,6 +69,7 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt = $connect->prepare($delete);
         $stmt->bind_param("i", $id);
         $stmt->execute();
+        $stmt->close();
     }
 
     //FOR INSERT RECORDS:
@@ -83,6 +84,7 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt = $connect->prepare($insert);
         $stmt->bind_param("ssss", $fname, $lname, $email, $city);
         $stmt->execute();
+        $stmt->close();
     }
 
     //FOR DISPLAY PROFILE:
@@ -101,6 +103,7 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
             $response = json_encode($response);
             echo $response;
         }
+        $stmt->close();
     }
 
     //FOR UPDATE PROFILE:
@@ -118,8 +121,14 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt = $connect->prepare($update);
         $stmt->bind_param("ssssi", $fname, $lname, $email, $city, $update_id);
         $stmt->execute();
+        $stmt->close();
        // echo "Updated Successfully !!";
  
  
     }
 }
+
+
+$connect->close();
+
+?>
