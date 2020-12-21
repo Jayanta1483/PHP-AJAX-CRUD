@@ -122,7 +122,7 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt->bind_param("ssssi", $fname, $lname, $email, $city, $update_id);
         $stmt->execute();
         $stmt->close();
-       // echo "Updated Successfully !!";
+       echo "Updated Successfully !!";
  
  
     }
