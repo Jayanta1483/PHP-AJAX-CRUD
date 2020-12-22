@@ -72,12 +72,20 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
             $total_pages = ceil($total_records / $limit);
 
                        for($i = 1; $i <= $total_pages; $i++){
-                        $output .= '<button class="btn btn-success page mr-1" onclick="displayRecords('.$i.')">'.$i.'</button>';
+                           if($i == $page){
+                                $class = "active";
+                           }else{
+                               $class = "";
+                           }
+                        $output .= '<button class="btn btn-success '.$class.' mr-1" onclick="displayRecords('.$i.')">'.$i.'</button>';
                     }
 
             $output .= '</div>';
 
             echo $output;
+        }else{
+            echo '<h4 class="text-center text-danger">Sorry...No Data to Display !!</h4>';
+            die();
         }
     }
 
