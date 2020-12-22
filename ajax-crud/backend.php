@@ -25,37 +25,68 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
 
         $select = "SELECT * FROM `students` ORDER BY `firstname` LIMIT $start, $limit";
         $result = $connect->query($select);
+        $output = "";
 
         if (!empty($result) && $result->num_rows > 0) {
             $index = $start + 1;
-            $output = "";
-            $page_no = $result->num_rows / $limit;
+            
+
+            $output .= '<table class="table table-success table-striped table-hover" width="100%" cellspacing="0" id="myTable" style="color:black;">
+                         <thead>
+                         <tr class="text-center">
+                         <th>#</th>
+                         <th>FIRST NAME</th>
+                         <th>LAST NAME</th>
+                         <th>EMAIL</th>
+                         <th>CITY</th>
+                         <th>EDIT</th>
+                         <th>DELETE</th>
+
+                     </tr>
+
+                 </thead>';
+
             while ($row = $result->fetch_assoc()) {
-         echo '<tr class="text-center">
-               <td>' . htmlspecialchars($index) . '</td>
-               <td>' . htmlspecialchars(ucwords($row["firstname"])) . '</td>
-               <td>' . htmlspecialchars(ucwords($row["lastname"])) . '</td>
-               <td>' . htmlspecialchars($row["email"]) . '</td>
-               <td>' . htmlspecialchars(ucwords($row["city"])) . '</td>
-               <td><button style="border:none;background:rgba(0,0,0,0);" onclick="showRecord(' . htmlspecialchars($row["stu_id"]) . ')" data-bs-toggle="modal" data-bs-target="#updateModal"><span style="color:green;"><i class="fas fa-edit"></i></span></button></td>
-               <td><button style="border:none;background:rgba(0,0,0,0);" onclick="deleteRecord(' . htmlspecialchars($row["stu_id"]) . ')"><span style="color:red;"><i class="fas fa-trash"></i></span></button></td>
-                </tr>';
+               $output .= '<tbody>
+                              <tr class="text-center">
+                                  <td>' . htmlspecialchars($index) . '</td>
+                                  <td>' . htmlspecialchars(ucwords($row["firstname"])) . '</td>
+                                  <td>' . htmlspecialchars(ucwords($row["lastname"])) . '</td>
+                                  <td>' . htmlspecialchars($row["email"]) . '</td>
+                                  <td>' . htmlspecialchars(ucwords($row["city"])) . '</td>
+                                  <td><button style="border:none;background:rgba(0,0,0,0);" onclick="showRecord(' . htmlspecialchars($row["stu_id"]) . ')" data-bs-toggle="modal" data-bs-target="#updateModal"><span style="color:green;"><i class="fas fa-edit"></i></span></button></td>
+                                  <td><button style="border:none;background:rgba(0,0,0,0);" onclick="deleteRecord(' . htmlspecialchars($row["stu_id"]) . ')"><span style="color:red;"><i class="fas fa-trash"></i></span></button></td>
+                             </tr>
+                         </tbody>';
 
                 $index++;
-
-                
             }
 
-            
+            $output .= ' 
+                       </table>
+                       <div id="pagination" class="text-center">';
+
+            $sel = "select * from students";
+            $res = $connect->query($sel);
+            $total_records = $res->num_rows;
+            $total_pages = ceil($total_records / $limit);
+
+                       for($i = 1; $i <= $total_pages; $i++){
+                        $output .= '<button class="btn btn-success page mr-1" onclick="displayRecords('.$i.')">'.$i.'</button>';
+                    }
+
+            $output .= '</div>';
+
+            echo $output;
         }
     }
 
     //FOR PAGINATION:
 
-    if($operation === "pagination"){
+    if ($operation === "pagination") {
         $select = "SELECT * FROM `students`";
         $result = $connect->query($select);
-        if(!empty($result) && $result->num_rows > 0){
+        if (!empty($result) && $result->num_rows > 0) {
             echo $result->num_rows;
         }
     }
@@ -122,13 +153,9 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         $stmt->bind_param("ssssi", $fname, $lname, $email, $city, $update_id);
         $stmt->execute();
         $stmt->close();
-       echo "Updated Successfully !!";
- 
- 
+        echo "Updated Successfully !!";
     }
 }
 
 
 $connect->close();
-
-

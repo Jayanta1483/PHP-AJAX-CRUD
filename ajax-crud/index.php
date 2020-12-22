@@ -124,8 +124,8 @@
 
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-success table-striped table-hover" width="100%" cellspacing="0" id="myTable" style="color:black;">
+                            <div class="table-responsive" id="tBody">
+                                <!-- <table class="table table-success table-striped table-hover" width="100%" cellspacing="0" id="myTable" style="color:black;">
                                     <thead>
                                         <tr class="text-center">
                                             <th>#</th>
@@ -142,14 +142,15 @@
                                     <tbody id="tBody">
 
                                     </tbody>
-                                </table>
-                                <div id="pagination" class="text-center">
+                                    <div id="pagination" class="text-center">
                                     <button class="btn btn-success page" value="1">1</button>
                                     <button class="btn btn-success page" value="2">2</button>
                                     <button class="btn btn-success page" value="3">3</button>
                                     <button class="btn btn-success page" value="4">4</button>
                                     <button class="btn btn-success page" value="5">5</button>
                                 </div>
+                                </table> -->
+                                
 
 
                             </div>

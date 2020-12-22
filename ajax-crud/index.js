@@ -1,40 +1,45 @@
-function displayRecords(url, element, option) {
-     
-    fetch(url, option).then(response => response.text().then(text => element.innerHTML = text));
-}
-
 let url = 'backend.php';
 let table = document.getElementById("tBody");
 
 
-let showData = new URLSearchParams();
-showData.append("operation", "display");
-const displayOption = {
-    method: "POST",
-    body: showData
-}
-
-displayRecords(url, table, displayOption);
-
-
-
-const pagination = document.querySelectorAll(" .page");
-console.log(pagination)
-
-pagination.forEach(element => element.onclick = (e) => {
-
-    console.log(e.target.value)
+function displayRecords(id) {
 
     let showData = new URLSearchParams();
     showData.append("operation", "display");
-    showData.append("page", e.target.value)
-
+    showData.append("page", id)
     const displayOption = {
         method: "POST",
         body: showData
     }
-    displayRecords(url, table, displayOption);
-})
+    fetch(url, displayOption).then(response => response.text().then(text => table.innerHTML = text));
+}
+
+
+displayRecords(1);
+
+
+
+//displayRecords(url, table, displayOption);
+
+
+
+// const pagination = document.querySelectorAll(" .page");
+// console.log(pagination)
+
+// pagination.forEach(element => element.onclick = (e) => {
+
+//     console.log(e.target.value)
+
+//     let showData = new URLSearchParams();
+//     showData.append("operation", "display");
+
+
+//     const displayOption = {
+//         method: "POST",
+//         body: showData
+//     }
+//     displayRecords(url, table, displayOption);
+// })
 
 
 
@@ -48,7 +53,7 @@ function deleteRecord(id) {
             method: "POST",
             body: delData
         };
-        fetch(url, delOption).then(() => displayRecords(url, table, displayOption))
+        fetch(url, delOption).then(() => displayRecords(1))
     }
 }
 
@@ -72,7 +77,7 @@ submit.addEventListener("click", () => {
         method: "POST",
         body: insertData
     };
-    fetch(url, insertOption).then(() => displayRecords(url, table, displayOption))
+    fetch(url, insertOption).then(() => displayRecords(1))
     fname.value = lname.value = email.value = city.value = "";
 })
 
@@ -128,7 +133,7 @@ function updateRecord() {
         body: updateData
     }
 
-    fetch(url, updateOption).then(() => displayRecords(url, table, displayOption));
+    fetch(url, updateOption).then(() => displayRecords(1));
 }
 
 
