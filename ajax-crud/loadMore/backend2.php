@@ -36,7 +36,7 @@ if (!empty($result) && $result->num_rows > 0) {
     $output .= '    </tbody>
     <tbody id="pagination">
     <tr class="text-center">
-                        <td colspan="5"><button class="btn btn-info text-white" onclick="loadMore('.$last_id.')">LOAD MORE</button></td>
+                        <td colspan="5"><button class="btn btn-info text-white" onclick="loadMore('.$last_id.')" id="loadBtn" >LOAD MORE</button></td>
                     </tr></tbody>';
 
     echo $output;

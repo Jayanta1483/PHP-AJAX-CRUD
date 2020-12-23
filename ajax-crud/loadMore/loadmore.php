@@ -56,8 +56,15 @@ require "connection.php";
             }
             fetch(url, option).then(response => response.text().then(text => {
                 const pagination = document.getElementById("pagination");
+                const loadBtn = document.getElementById("loadBtn");
+                if(text){
                     pagination.remove();
-                    myTable.innerHTML += text
+                    myTable.innerHTML += text;
+                }else{
+                    loadBtn.classList.add("disabled")
+                    loadBtn.innerText = "FINISHED"
+                }
+                   
 
                 }
 
