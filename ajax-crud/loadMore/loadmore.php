@@ -1,3 +1,6 @@
+<?php
+require "connection.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +18,7 @@
         <div class="card shadow mb-4 mt-4">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="myTable">
                         <thead class="text-center  bg-info text-white">
                             <tr>
                                 <th>#</th>
@@ -25,15 +28,7 @@
                                 <th>CITY</th>
                             </tr>
                         </thead>
-                        <tbody class="text-primary">
-                              <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                              </tr>
-                        </tbody>
+                        
                     </table>
 
                 </div>
@@ -51,7 +46,24 @@
 
     <script>
         $(document).ready(function(){
-            console.log("welcome")
+            $.ajax({
+                  type:"POST",
+                  url:"backend2.php",
+                  success:(response)=>{
+                      $("#myTable").html(response)
+                  }
+              })
+          function loadMore(lastId){
+              let data = `lastId:${lastId}`;
+              $.ajax({
+                  type:"POST",
+                  url:"backend2.php",
+                  data:data,
+                  success:(response)=>{
+                      console.log(response)
+                  }
+              })
+          }
         })
     </script>
 </body>
