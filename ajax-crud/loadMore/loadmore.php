@@ -44,7 +44,13 @@ require "connection.php";
 
     <script>
         const myTable = document.getElementById("myTable");
-        fetch("backend2.php").then(response => response.text().then(text => myTable.innerHTML += text));
+        fetch("backend2.php").then(response => response.text().then(text => {
+            if(text){
+            myTable.innerHTML += text;
+            }else{
+                myTable.innerHTML += '<tr><td colspan="5"><h3 class="text-center text-danger">Sorry...No Data to Display</h3></td></tr>';
+            }
+            }));
         
         function loadMore(id) {
             const url = 'backend2.php';

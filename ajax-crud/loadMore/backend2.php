@@ -40,9 +40,6 @@ if (!empty($result) && $result->num_rows > 0) {
                     </tr></tbody>';
 
     echo $output;
-} else {
-
-    echo "<h3 class='text-center text-danger'>Sorry...No Data to Display !!</h3>";
 }
 
 
