@@ -19,28 +19,6 @@ displayRecords(1);
 
 
 
-//displayRecords(url, table, displayOption);
-
-
-
-// const pagination = document.querySelectorAll(" .page");
-// console.log(pagination)
-
-// pagination.forEach(element => element.onclick = (e) => {
-
-//     console.log(e.target.value)
-
-//     let showData = new URLSearchParams();
-//     showData.append("operation", "display");
-
-
-//     const displayOption = {
-//         method: "POST",
-//         body: showData
-//     }
-//     displayRecords(url, table, displayOption);
-// })
-
 
 
 function deleteRecord(id) {

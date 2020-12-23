@@ -61,16 +61,21 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
 
                 $index++;
             }
+               
 
-            $output .= ' 
-                       </table>
-                       <div id="pagination" class="text-center">';
 
             $sel = "select * from students";
             $res = $connect->query($sel);
             $total_records = $res->num_rows;
             $total_pages = ceil($total_records / $limit);
 
+            $output .= ' 
+                       </table>
+                       <div id="pagination">
+                       <span>Showing '.$limit.' out of '.$total_records.' entries</span>
+                       <span style="float:right;">';
+
+            
                        for($i = 1; $i <= $total_pages; $i++){
                            if($i == $page){
                                 $class = "active";
@@ -80,7 +85,8 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
                         $output .= '<button class="btn btn-success '.$class.' mr-1" onclick="displayRecords('.$i.')">'.$i.'</button>';
                     }
 
-            $output .= '</div>';
+            $output .= '</span>
+                        </div>';
 
             echo $output;
         }else{

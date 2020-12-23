@@ -125,31 +125,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" id="tBody">
-                                <!-- <table class="table table-success table-striped table-hover" width="100%" cellspacing="0" id="myTable" style="color:black;">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th>#</th>
-                                            <th>FIRST NAME</th>
-                                            <th>LAST NAME</th>
-                                            <th>EMAIL</th>
-                                            <th>CITY</th>
-                                            <th>EDIT</th>
-                                            <th>DELETE</th>
-
-                                        </tr>
-
-                                    </thead>
-                                    <tbody id="tBody">
-
-                                    </tbody>
-                                    <div id="pagination" class="text-center">
-                                    <button class="btn btn-success page" value="1">1</button>
-                                    <button class="btn btn-success page" value="2">2</button>
-                                    <button class="btn btn-success page" value="3">3</button>
-                                    <button class="btn btn-success page" value="4">4</button>
-                                    <button class="btn btn-success page" value="5">5</button>
-                                </div>
-                                </table> -->
+                               
                                 
 
 
