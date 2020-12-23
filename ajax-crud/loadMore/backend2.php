@@ -12,11 +12,15 @@ $limit = 4;
 $select = "SELECT * FROM `students` ORDER BY `firstname` LIMIT $offset,$limit";
 $result = $connect->query($select);
 $output = "";
+$last_id = $offset + $limit;
 if (!empty($result) && $result->num_rows > 0) {
-    $index = 1;
+    $index = $last_id - 3;
+    $output .= '
+                <tbody class="text-primary">';
+
     while ($row = $result->fetch_assoc()) {
 
-        $output .= '<tbody class="text-primary">
+        $output .= '
                      <tr class="text-center">
                          <td>' . $index . '</td>
                          <td>' . htmlspecialchars(ucwords($row["firstname"])) . '</td>
@@ -24,17 +28,17 @@ if (!empty($result) && $result->num_rows > 0) {
                          <td>' . $row["email"] . '</td>
                          <td>' . htmlspecialchars(ucwords($row["city"])) . '</td>
                       </tr>
-                 </tbody>
+                 
                  ';
 
         $index++;
     }
-    $output .= '<div class="text-center"><button class="btn btn-info text-white" onclick="loadMore()">LOAD MORE</button></div>';
-echo $output;
+    $output .= '    </tbody>
+    <tbody id="pagination">
+    <tr class="text-center">
+                        <td colspan="5"><button class="btn btn-info text-white" onclick="loadMore('.$last_id.')">LOAD MORE</button></td>
+                    </tr></tbody>';
 
-
-
+    echo $output;
 } else {
-
-
 }

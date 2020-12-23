@@ -17,9 +17,9 @@ require "connection.php";
     <div class="container mr-auto mt-4">
         <div class="card shadow mb-4 mt-4">
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="table-responsive" id="dataTable">
                     <table class="table table-bordered" id="myTable">
-                        <thead class="text-center  bg-info text-white">
+                        <thead class="text-center  bg-info text-white" >
                             <tr>
                                 <th>#</th>
                                 <th>FIRST NAME</th>
@@ -28,9 +28,7 @@ require "connection.php";
                                 <th>CITY</th>
                             </tr>
                         </thead>
-                        
                     </table>
-
                 </div>
             </div>
         </div>
@@ -45,26 +43,26 @@ require "connection.php";
 
 
     <script>
-        $(document).ready(function(){
-            $.ajax({
-                  type:"POST",
-                  url:"backend2.php",
-                  success:(response)=>{
-                      $("#myTable").html(response)
-                  }
-              })
-          function loadMore(lastId){
-              let data = `lastId:${lastId}`;
-              $.ajax({
-                  type:"POST",
-                  url:"backend2.php",
-                  data:data,
-                  success:(response)=>{
-                      console.log(response)
-                  }
-              })
-          }
-        })
+        const myTable = document.getElementById("myTable");
+        fetch("backend2.php").then(response => response.text().then(text => myTable.innerHTML += text));
+        
+        function loadMore(id) {
+            const url = 'backend2.php';
+            const param = new URLSearchParams();
+            param.append("lastId", id);
+            let option = {
+                method: "POST",
+                body: param
+            }
+            fetch(url, option).then(response => response.text().then(text => {
+                const pagination = document.getElementById("pagination");
+                    pagination.remove();
+                    myTable.innerHTML += text
+
+                }
+
+            ));
+        }
     </script>
 </body>
 
