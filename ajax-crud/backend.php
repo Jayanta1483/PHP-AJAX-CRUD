@@ -21,15 +21,15 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
         }
 
         $limit = 4;
-        $start = ($page - 1) * $limit;
+        $offset = ($page - 1) * $limit;
 
-        $select = "SELECT * FROM `students` ORDER BY `firstname` LIMIT $start, $limit";
+        $select = "SELECT * FROM `students` ORDER BY `firstname` LIMIT $offset, $limit";
         $result = $connect->query($select);
         $output = "";
 
         if (!empty($result) && $result->num_rows > 0) {
-            $index = $start + 1;
-            
+            $index = $offset + 1;
+
 
             $output .= '<table class="table table-success table-striped table-hover" width="100%" cellspacing="0" id="myTable" style="color:black;">
                          <thead>
@@ -47,7 +47,7 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
                  </thead>';
 
             while ($row = $result->fetch_assoc()) {
-               $output .= '<tbody>
+                $output .= '<tbody>
                               <tr class="text-center">
                                   <td>' . htmlspecialchars($index) . '</td>
                                   <td>' . htmlspecialchars(ucwords($row["firstname"])) . '</td>
@@ -61,35 +61,50 @@ if (isset($_POST["operation"]) && $_POST["operation"] !== "") {
 
                 $index++;
             }
-               
+
 
 
             $sel = "select * from students";
             $res = $connect->query($sel);
             $total_records = $res->num_rows;
             $total_pages = ceil($total_records / $limit);
-
-            $output .= ' 
+            $start = ($offset + 1);
+            $end = ($offset + $limit);
+            $remaining_records = ($total_records - $offset);
+            if ($remaining_records >= 4) {
+                $output .= ' 
                        </table>
                        <div id="pagination">
-                       <span>Showing '.$limit.' out of '.$total_records.' entries</span>
+                       <span>Showing ' . $start . ' to ' . $end . ' out of ' . $total_records . ' entries</span>
                        <span style="float:right;">';
+            } else if ($remaining_records < 4 && $remaining_records > 1) {
 
-            
-                       for($i = 1; $i <= $total_pages; $i++){
-                           if($i == $page){
-                                $class = "active";
-                           }else{
-                               $class = "";
-                           }
-                        $output .= '<button class="btn btn-success '.$class.' mr-1" onclick="displayRecords('.$i.')">'.$i.'</button>';
-                    }
+                $output .= ' 
+                       </table>
+                       <div id="pagination">
+                       <span>Showing ' . $start . ' to ' . $total_records . ' out of ' . $total_records . ' entries</span>
+                       <span style="float:right;">';
+            } else {
+                $output .= ' 
+                       </table>
+                       <div id="pagination">
+                       <span>Showing ' . $start . ' out of ' . $total_records . ' entries</span>
+                       <span style="float:right;">';
+            }
+            for ($i = 1; $i <= $total_pages; $i++) {
+                if ($i == $page) {
+                    $class = "active";
+                } else {
+                    $class = "";
+                }
+                $output .= '<button class="btn btn-success ' . $class . ' mr-1" onclick="displayRecords(' . $i . ')">' . $i . '</button>';
+            }
 
             $output .= '</span>
                         </div>';
 
             echo $output;
-        }else{
+        } else {
             echo '<h4 class="text-center text-danger">Sorry...No Data to Display !!</h4>';
             die();
         }
